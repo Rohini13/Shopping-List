@@ -28,7 +28,7 @@ import {
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink href="https://github.com/Rohini13/Shopping-List">Github</NavLink>
+                                <NavLink href="https://github.com/Rohini13">Github</NavLink>
                             </NavItem>
                         </Nav>
                     </Collapse>
