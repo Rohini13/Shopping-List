@@ -22,13 +22,13 @@ class ShoppingList extends Component {
                        {items.map(({_id, name})=>(
                            <CSSTransition key={_id} timeout={500} classNames="fade">
                                <ListGroupItem>
-                                   <Button
+                                   {this.props.auth.isAuthenticated?<Button
                                    className="remove-btn"
                                    color="danger"
                                    size="sm"
                                    onClick={this.onClickDel.bind(this, _id)}>
                                     X
-                                   </Button>
+                                   </Button>:null}
                                    {name}
                                </ListGroupItem>
                            </CSSTransition>
@@ -45,10 +45,12 @@ ShoppingList.propTypes = {
     deleteItem: PropTypes.func.isRequired,
     addItem: PropTypes.func.isRequired,
     item: PropTypes.object.isRequired
+    , auth: PropTypes.object
 }
 
 const mapStateToProps = (state) =>({
-    item: state.item
+    item: state.item,
+    auth: state.auth
 })
 
 export default connect(mapStateToProps, { getItems, deleteItem, addItem })(ShoppingList)
