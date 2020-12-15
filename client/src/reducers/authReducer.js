@@ -10,10 +10,10 @@ import {
 
 
 const initialState ={
-    token: localStorage.getItem('token'),
+    token: window.sessionStorage.getItem('token'),
     isAuthenticated: null,
     isLaoding: false,
-    user: null
+    user: JSON.parse(window.sessionStorage.getItem('user'))
 }
 
 export default function(state= initialState, action){
@@ -34,7 +34,8 @@ export default function(state= initialState, action){
                 
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
-            localStorage.setItem('token', action.payload.token)
+            window.sessionStorage.setItem('token', action.payload.token)
+            window.sessionStorage.setItem('user', JSON.stringify(action.payload.user))
             return{
                 ...state,
                 ...action.payload,
@@ -46,7 +47,8 @@ export default function(state= initialState, action){
         case LOGIN_FAIL:
         case LOGOUT_SUCCESS:
         case REGISTER_FAIL:
-            localStorage.removeItem('token')
+            window.sessionStorage.removeItem('token')
+            window.sessionStorage.removeItem('user')
             return{
                 ...state,
                 token:null,

@@ -14,7 +14,6 @@ import {
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { login } from '../../actions/authAction'
-import history from '../../history'
 import { clearErrors } from '../../actions/errorAction'
 
 export class RegisterModal extends Component {
@@ -30,7 +29,10 @@ export class RegisterModal extends Component {
         if (error !== prevProps.error) {
             if (error.id === 'LOGIN_FAIL')
                 this.setState({ msg: error.msg })
-            else this.setState({ msg: null })
+            else 
+            {
+                this.setState({ msg: null })
+            }
         }
 
         if (this.state.modal) {
@@ -38,6 +40,7 @@ export class RegisterModal extends Component {
                 this.toggle()
         }
     }
+
     toggle = () => {
         this.props.clearErrors()
         this.setState({
@@ -69,7 +72,6 @@ export class RegisterModal extends Component {
                         {this.state.msg ? <Alert color="danger">{this.state.msg}</Alert> : null}
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
-
                                 <Label for="email">Email</Label>
                                 <Input type="email"
                                     name="email"
